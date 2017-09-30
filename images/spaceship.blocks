@@ -1,0 +1,51 @@
+when I start as a clone
+show
+forever 
+  point in direction (course)
+  go to x: ([x position v] of [Spaceship v]) y: ([y position v] of [Spaceship v])
+  if <not <key [up arrow v] pressed?>> then 
+    switch costume to [spaceship-a v]
+  end
+  if <touching color [#91b6c5] ?> then 
+    play sound [zoop v]
+    switch costume to [cloud v]
+    repeat (5) 
+      change size by (10)
+    end
+    broadcast [game over v]
+    delete this clone
+  end
+end
+
+when [up arrow v] key pressed
+switch costume to [spaceship-a2 v]
+wait (0.1) secs
+switch costume to [spaceship-a3 v]
+wait (0.1) secs
+
+when green flag clicked
+set [thrust v] to [0.1]
+set [friction v] to [0.98]
+switch costume to [spaceship-a v]
+set size to (50) %
+go to front
+hide
+go to x: (0) y: (0)
+point in direction (90 v)
+set [course v] to [90]
+set [speed v] to [0]
+create clone of [myself v]
+forever 
+  move (speed) steps
+  set [speed v] to ((speed) * (friction))
+end
+
+when [up arrow v] key pressed
+point in direction (course)
+change [speed v] by (thrust)
+
+when [left arrow v] key pressed
+change [course v] by (-5)
+
+when [right arrow v] key pressed
+change [course v] by (5)

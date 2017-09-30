@@ -1,0 +1,7 @@
+when I receive [game over v]
+switch backdrop to [stars2 v]
+stop [all v]
+
+when green flag clicked
+switch backdrop to [stars v]
+set [score v] to [0]

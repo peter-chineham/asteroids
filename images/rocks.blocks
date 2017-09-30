@@ -1,0 +1,53 @@
+when green flag clicked
+set [max_rocks v] to [5]
+set [min_distance v] to [200]
+hide
+set size to (50) %
+switch costume to [rocks v]
+set [rocks v] to [0]
+forever 
+  if <(rocks) < (max_rocks)> then 
+    create clone of [myself v]
+    change [rocks v] by (1)
+  end
+  wait until <(rocks) < [5]>
+  wait (1) secs
+end
+
+when I start as a clone
+set [left_right v] to (pick random (1) to (2))
+set [rotation v] to (pick random (1) to (5))
+forever 
+  if <(left_right) = [1]> then 
+    turn ccw (rotation) degrees
+  else 
+    turn cw (rotation) degrees
+  end
+  if <touching [laser v] ?> then 
+    play sound [laser2 v]
+    change [score v] by (1)
+    set size to (1) %
+    repeat (2) 
+      switch costume to [cloud-a v]
+      change size by (5)
+      switch costume to [cloud-b v]
+      change size by (5)
+      switch costume to [cloud-c v]
+      change size by (5)
+      switch costume to [cloud-d v]
+      change size by (5)
+    end
+    change [rocks v] by (-1)
+    delete this clone
+  end
+end
+
+when I start as a clone
+go to x: (pick random (-240) to (240)) y: (pick random (-180) to (180))
+repeat until <(distance to [Spaceship v]) > (min_distance)> 
+  go to x: (pick random (-240) to (240)) y: (pick random (-180) to (180))
+end
+show
+glide (pick random (5) to (10)) secs to x: (pick random (-240) to (240)) y: (pick random (-180) to (180))
+change [rocks v] by (-1)
+delete this clone

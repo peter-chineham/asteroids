@@ -1,0 +1,22 @@
+when green flag clicked
+set [max_laser v] to [150]
+hide
+set size to (10) %
+
+when I start as a clone
+go to x: ([x position v] of [Spaceship v]) y: ([y position v] of [Spaceship v])
+point in direction (course)
+show
+play sound [laser1 v]
+set [laser v] to [0]
+repeat until <(laser) > (max_laser)> 
+  if <touching [edge v] ?> then 
+    delete this clone
+  end
+  move (10) steps
+  change [laser v] by (10)
+end
+delete this clone
+
+when [space v] key pressed
+create clone of [myself v]
