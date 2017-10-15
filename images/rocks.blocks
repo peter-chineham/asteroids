@@ -10,7 +10,7 @@ forever
     create clone of [myself v]
     change [rocks v] by (1)
   end
-  wait until <(rocks) < [5]>
+  wait until <(rocks) < (max_rocks)>
   wait (1) secs
 end
 
